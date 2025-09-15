@@ -123,7 +123,9 @@ export class serialManager {
         //send boot commands
         //await this.send(this.bootCommands)
         //await this.send(["M150 P255 R255 U255 B255"]);
-        await this.send(["M104 S190"]); //set extruder temp to 190 to prevent cold extrusion errors
+        await this.send(["M302 S05"]);  /// M302 - Allow cold extrude, or set minimum extrude temperature <a href="https://reprap.org/wiki/G-code#M302:_Allow_cold_extrudes">M302: Allow cold extrudes</a>
+            //This tells the printer to allow movement of the extruder motor above a certain temperature, or if disabled, to allow extruder movement when the hotend is below a safe printing temperature.
+
         await this.send(["G28 X Y Z"]); //home all axes
         await this.send(["G0 Z31.5"]); //move z to safe height
     
