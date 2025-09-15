@@ -346,12 +346,13 @@ const retractBtn = document.getElementById('retract-btn');
 
 if (extrudeBtn) {
   extrudeBtn.addEventListener('click', () => {
-    serial.send(["G91", "G0 E-2", "G90"]); 
+    serial.send(["M83", "G0 E-2", "M82"]);  //Extruder not included in relative positioning, so M82 & M83 used
+
   });
 }
 if (retractBtn) {
   retractBtn.addEventListener('click', () => {
-    serial.send(["G91", "G0 E2", "G90"]);
+    serial.send(["M83", "G0 E2", "M82"]);//Extruder not included in relative positioning, so M82 & M83 used
   });
 }
 
