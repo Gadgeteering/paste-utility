@@ -332,12 +332,12 @@ document.getElementById("jog-xm").addEventListener("click", () => {
 
 document.getElementById("jog-zp").addEventListener("click", () => {
   let dist = getJogDistance();
-  serial.send(["G91", `G0 Z${dist}`, "G90"]);
+  serial.send(["G91", `G0 Z-${dist}`, "G90"]);
 });
 
 document.getElementById("jog-zm").addEventListener("click", () => {
   let dist = getJogDistance();
-  serial.send(["G91", `G0 Z-${dist}`, "G90"]);
+  serial.send(["G91", `G0 Z${dist}`, "G90"]);
 });
 
 // Extrude and Retract B motor
