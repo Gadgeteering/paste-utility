@@ -7,14 +7,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite",              
+    "serve": "vite",
     "deploy:gh": "gh-pages -d dist",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
     "gh-pages": "^5.0.0",
-    "vite-plugin-node-polyfills": "^0.23.0"
+    "vite": "^7.1.7",
+    "vite-plugin-node-polyfills": "^0.24.0"
   },
   "dependencies": {
     "@tracespace/parser": "^5.0.0-alpha.0",
