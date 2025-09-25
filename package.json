@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite",               // dev server
+    "serve": "vite",              
     "deploy:gh": "gh-pages -d dist",
     "preview": "vite preview"
   },
