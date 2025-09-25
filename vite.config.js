@@ -1,7 +1,9 @@
 import { resolve } from 'path';
+import { defineConfig } from 'vite';
+
 
 export default {
-    base: './',
+    base: '/paste-utility/',
     optimizeDeps: { exclude: ["fsevents"] },
     publicDir: 'public',
     build: {
