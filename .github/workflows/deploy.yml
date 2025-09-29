@@ -1,41 +1,51 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
 on:
   push:
     branches:
-      - main  # Trigger on pushes to main
+      - main
 
 jobs:
-  build-and-deploy:
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repository
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # 2. Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
         with:
-          node-version: 20
-          cache: 'npm'
+          lfs: true
 
-      # 3. Install dependencies
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
       - name: Install dependencies
-        run: npm ci
+        uses: bahmutov/npm-install@v1
 
-      # 4. Run dev server briefly (for testing only)
-      - name: Run dev server (debug)
-        run: npm run dev & sleep 10
-
-      # 5. Build project for production
       - name: Build project
         run: npm run build
 
-      # 6. Deploy to GitHub Pages
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-files
+          path: ./dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: production-files
+          path: ./dist
+
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
